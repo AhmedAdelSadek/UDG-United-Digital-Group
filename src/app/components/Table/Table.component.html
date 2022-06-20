@@ -1,0 +1,94 @@
+<div class="main">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <input fxFlex="65" fxFlex.xs="45" type="file" name="files" class="form-control" #uploads
+      (change)="uploadCSV(uploads.files)" multiple value="process" accept=".csv" />
+    <div fxFlex="35" fxFlex.xs="50" *ngIf="dataList.length" fxLayout="row" fxLayoutAlign="space-around center">
+      <div>
+        <button mat-button (click)="openDialog('Add',object)" mat-flat-button color="primary"
+          [ngStyle]="{'background-color':'#17a2b8' }">Add Row</button>
+      </div>
+      <div>
+        <button mat-button (click)="exportExcel()" mat-flat-button color="primary"
+          [ngStyle]="{'background-color':'#17a2b8' }">Export</button>
+      </div>
+
+      <div>
+        <button mat-button (click)="navChart()" mat-flat-button color="primary"
+          [ngStyle]="{'background-color':'#17a2b8' }">Chart</button>
+      </div>
+
+    </div>
+  </div>
+  <div *ngIf="dataList.length" class="tableContainer">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows [ngStyle]="{'min-width':'100%' }" matSort>
+      <ng-container *ngFor="let column of columns; ; trackBy: trackByFn" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{column}}
+        </th>
+        <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+          <ng-container *ngIf="column != 'Action'">
+            <ng-container>
+              {{element[column] ? element[column] : '--------'}}
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="column == 'Action'">
+            <ng-container class="action-link">
+              <a [ngStyle]="{'color':'#007bff;' }"
+                (click)="openDialog('Update',element); $event.stopPropagation()">Edit</a> |
+              <a [ngStyle]="{'color':'#007bff;' }"
+                (click)="openDialog('Delete',element); $event.stopPropagation()">Delete</a>
+            </ng-container>
+          </ng-container>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button aria-label="expand row" class="test"
+            (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+            <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length"
+          [ngStyle]="{'background-color':'white', 'color': 'black' }">
+          <div class="element-detail" [@detailExpand]="element == expandedElement? 'expanded' : 'collapsed'">
+            <div class="element-description">
+              <ng-container
+                *ngIf="!element.Beschreibung && !element.Materialangaben && !element.Taschenart && !element.Bein && !element.Ursprungsland">
+                Kein Data zu schauen
+              </ng-container>
+              <div *ngIf="element.Beschreibung">
+                <b>{{'Beschreibung :'}}</b> {{element.Beschreibung}}
+              </div>
+              <div *ngIf="element.Materialangaben">
+                <b>{{'Materialangaben :'}}</b> {{element.Materialangaben}}
+              </div>
+              <div *ngIf="element.Taschenart">
+                <b>{{'Taschenart :'}}</b> {{element.Taschenart}}
+              </div>
+              <div *ngIf="element.Bein">
+                <b>{{'Bein :'}}</b> {{element.Bein}}
+              </div>
+              <div *ngIf="element.Ursprungsland">
+                <b>{{'Ursprungsland :'}}</b> {{element.Ursprungsland}}
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand ; sticky: true"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    </table>
+  </div>
+  <mat-paginator [hidden]="isHidden" [pageSize]="20" class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>

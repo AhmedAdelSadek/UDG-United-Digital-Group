@@ -1,0 +1,116 @@
+<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+  <div *ngIf="action != 'Delete'; else elseTemplate" fxLayout="row wrap" fxFlex="100">
+    <div fxLayout="row wrap" fxFlex="100">
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Artikelname" matInput [(ngModel)]="local_data.Artikelname"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Bein" matInput [(ngModel)]="local_data.Bein"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Beschreibung" matInput [(ngModel)]="local_data.Beschreibung"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Bildname" matInput [(ngModel)]="local_data.Bildname"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxFlex="100">
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Geschlecht" matInput [(ngModel)]="local_data.Geschlecht"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Grammatur" matInput [(ngModel)]="local_data.Grammatur"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Hauptartikelnr" matInput [(ngModel)]="local_data.Hauptartikelnr"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Hersteller" matInput [(ngModel)]="local_data.Hersteller"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxFlex="100">
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Herstellung" matInput [(ngModel)]="local_data.Herstellung"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Kragen" matInput [(ngModel)]="local_data.Kragen"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Material" matInput [(ngModel)]="local_data.Material"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Materialangaben" matInput [(ngModel)]="local_data.Materialangaben"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxFlex="100">
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Produktart" matInput [(ngModel)]="local_data.Produktart"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Taschenart" matInput [(ngModel)]="local_data.Taschenart"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Ursprungsland" matInput [(ngModel)]="local_data.Ursprungsland"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+      <div fxFlex="25" fxFlex.sm="48" fxFlex.xs="100">
+        <mat-form-field style="min-width: 90%;">
+          <input placeholder="{{action}} Ärmel" matInput [(ngModel)]="local_data.Aermel"
+            (ngModelChange)="detectDataChanges()">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.Artikelname}}</b>?
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()" [disabled]="!status.value && local_data.action == 'Add'">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>

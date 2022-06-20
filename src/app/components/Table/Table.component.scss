@@ -1,0 +1,80 @@
+.mat-header-cell {
+  color: #efefef;
+  background-color: black;
+}
+
+td {
+  color: #efefef;
+  background-color: #000000cc;
+}
+
+.main {
+  overflow: hidden;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+  background-color: #efefef;
+  ;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.element-description {
+  padding: 16px 0px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
+
+mat-paginator {
+  background-color: #17a2b8;
+}
+
+.test {
+  background: #ffcaca00;
+  color: white;
+  border: none;
+}
+
+tr.detail-row {
+  background: white;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: #efefef;
+  background-color: #17a2b8;
+  // background-color: #0099CC;
+}
+
+.tableContainer {
+  overflow: auto;
+  height: 621px;
+}
+
+@media only screen and (max-width: 490px) {
+
+  /*Tablets [601px -> 1200px]*/
+  .tableContainer {
+    height: 558px;
+  }
+}
